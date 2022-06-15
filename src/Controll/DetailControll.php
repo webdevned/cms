@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controll;
 
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
+use App\Controll\BaseController;
 
-class DetailControll {
+class DetailControll extends BaseController {
+
     public function __construct() {
-        $loader = new FilesystemLoader(dirname(__DIR__, 1) . '/templates');
-        $twig = new Environment($loader);
-
-        echo $twig->render('base.html.twig', [
+        $this->render('base.html.twig', [
             'title' => 'Controller',
             'controller' => 'DetailControll'
         ]);
