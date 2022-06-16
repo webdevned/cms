@@ -9,16 +9,13 @@ require '../vendor/autoload.php';
 $page = $_GET['page'];
 
 if (!empty($page) && is_string($page)) {
-    $firstToUpper = strtoupper($page[0]);
-    $page = substr_replace($page, $firstToUpper, 0, 1);
+    $targetController = (new ControllerProvider())->getController($page);
 
-    $targetController = 'App\Controller\\' . $page . 'Controller';
-
-    if (in_array($targetController, (new ControllerProvider())->getList())) {
-        $page = new $targetController();
-    } else {
-        die('Omg! Controller not found: ' . $targetController);
+    if (!$targetController) {
+        die(sprintf("Controller for page '%s' is not found in ControllerProvider", $page));
     }
+
+    $response = new $targetController();
 } else {
     die('Omg! Page is not defined.');
 }
