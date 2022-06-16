@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controll;
+namespace App\Controller;
 
-class ListControll {
+class ListController {
     public function __construct() {
         echo 'list omg';
     }

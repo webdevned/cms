@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controll;
+namespace App\Controller;
 
-class HomeControll {
+class HomeController {
     public function __construct() {
         echo 'home omg';
     }

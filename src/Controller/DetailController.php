@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controll;
+namespace App\Controller;
 
-use App\Controll\BaseController;
+use App\Controller\BaseController;
 
-class DetailControll extends BaseController {
+class DetailController extends BaseController {
 
     public function __construct() {
         $this->render('base.html.twig', [
