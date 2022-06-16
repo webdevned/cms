@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class HomeController {
+class HomeController extends BaseController {
     public function __construct() {
-        echo 'home omg';
+        parent::__construct();
+
+        $this->render('home.html.twig', [
+            'title' => 'Home',
+            'greeting' => 'Home sweet home'
+        ]);
     }
 }
