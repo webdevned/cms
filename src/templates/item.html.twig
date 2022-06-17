@@ -1,5 +1,5 @@
 <ul>
-    {% for prop, value in item %}
-        <li>{{ prop }}: {{ value }}</li>
-    {% endfor %}
+        <li>{{ item.getId() }}</li>
+        <li>{{ item.getProductName() }}</li>
+        <li>{{ item.getDescription() }}</li>
 </ul>

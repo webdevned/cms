@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Repository\ProductRepository;
 
 class ListController extends BaseController {
+    
     public function __construct() {
         parent::__construct();
 

@@ -1,27 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
+
+use App\DTO\ProductMapper;
 
 class ProductRepository {
 
-    private array $products;
+    private array $list;
 
     public function __construct() {
-        $db = file_get_contents(dirname(__DIR__, 2) . '/database/data.json');
+        $url = dirname(__DIR__, 2) . '/database/data.json';
+        $data = file_get_contents($url);
+        $array = json_decode($data, true);
 
-        $this->products = json_decode($db, true);
+        $productMapper = new ProductMapper();
+        foreach ($array as $product) {
+            $this->list[$product['id']] = $productMapper->map($product);
+        }
     }
 
     public function getList() {
-        return $this->products;
+        return $this->list;
     }
 
     public function getProduct(int $id) {
-        return $this->products[$id - 1];
+        return $this->list[$id] ?? null;
     }
 
     public function hasProduct(int $id) {
-        return array_search($id, array_column($this->products, 'id'), true);
+        return array_key_exists($id, $this->list);
 
     }
 }
