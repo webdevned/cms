@@ -11,11 +11,12 @@ $page = $_GET['page'];
 if (!empty($page) && is_string($page)) {
     $targetController = (new ControllerProvider())->getController($page);
 
-    if (!$targetController) {
-        die(sprintf("Controller for page '%s' is not found in ControllerProvider", $page));
+    if ($targetController) {
+        $response = new $targetController();
+        die('All good.');
     }
-
-    $response = new $targetController();
-} else {
-    die('Omg! Page is not defined.');
 }
+
+http_response_code(404);
+var_dump(sprintf("Controller for page '%s' is not found in ControllerProvider", $page));
+die('Omg! Page or Controller not found.');
