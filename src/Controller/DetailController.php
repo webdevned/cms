@@ -12,12 +12,19 @@ class DetailController extends BaseController {
         parent::__construct();
 
         $repo = new ProductRepository();
+        $randomProduct = $repo->getList()[array_rand($repo->getList())];
 
-        $product = $repo->getProduct(random_int(0, count($repo->getList())));
+        $id = (int) ($_GET['id'] ?? $randomProduct->getId());
 
-        $this->render('detail.html.twig', [
-            'title' => 'Detail',
-            'item' => $product
-        ]);
+        if ($repo->hasProduct($id)) {
+            $product = $repo->getProduct($id);
+
+            $this->render('detail.html.twig', [
+                'title' => 'Detail',
+                'item' => $product
+            ]);
+        } else {
+            die(sprintf('Product (id: %s) not found', $id));
+        }
     }
 }
