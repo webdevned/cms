@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul>
-        {% for i in list %}
-            <li>{{ i }}</li>
-        {% endfor %}
-    </ul>
+    {% for item in list %}
+        {% include 'item.html.twig' %}
+    {% endfor %}
 {% endblock %}
