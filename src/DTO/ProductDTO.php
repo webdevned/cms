@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\DTO;
 
 class ProductDTO {
-
-    protected string $id;
-    protected string $productName;
-    protected string $description;
+    private string $id;
+    private string $name;
+    private string $description;
 
     public function __construct(array $data) {
-        $this->setId($data['id']);
-        $this->setProductName($data['productname']);
-        $this->setDescription($data['description']);
+        if (!empty($data['id']) && !empty($data['name']) && !empty($data['description'])) {
+            $this->setId($data['id']);
+            $this->setName($data['name']);
+            $this->setDescription($data['description']);
+        }
     }
 
     /**
@@ -35,17 +36,17 @@ class ProductDTO {
     /**
      * @return string
      */
-    public function getProductName(): string
+    public function getName(): string
     {
-        return $this->productName;
+        return $this->name;
     }
 
     /**
-     * @param string $productName
+     * @param string $name
      */
-    public function setProductName(string $productName): void
+    public function setName(string $name): void
     {
-        $this->productName = $productName;
+        $this->name = $name;
     }
 
     /**
@@ -63,6 +64,4 @@ class ProductDTO {
     {
         $this->description = $description;
     }
-
-
 }
