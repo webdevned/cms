@@ -6,6 +6,8 @@ use App\Service\ControllerProvider;
 
 require '../vendor/autoload.php';
 
+session_start();
+
 $page = $_GET['page'];
 
 if (!empty($page) && is_string($page)) {
@@ -13,10 +15,9 @@ if (!empty($page) && is_string($page)) {
 
     if ($targetController) {
         $response = new $targetController();
-        die('All good.');
+        die();
     }
 }
 
 http_response_code(404);
-var_dump(sprintf("Controller for page '%s' is not found in ControllerProvider", $page));
-die('Omg! Page or Controller not found.');
+die('Omg! Page or Controller not found. Probably it is missing in ControllerProvider?');

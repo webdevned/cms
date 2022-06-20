@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "username": "one",
+    "email": "one@one.one",
+    "password": "1"
+  },
+  {
+    "id": "2",
+    "username": "two",
+    "email": "two@two.two",
+    "password": "2"
+  },
+  {
+    "id": "3",
+    "username": "three",
+    "email": "three@three.three",
+    "password": "3"
+  },
+  {
+    "id": "4",
+    "username": "four",
+    "email": "four@four.four",
+    "password": "4"
+  }
+]
