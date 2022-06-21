@@ -50,6 +50,8 @@ class LoginController extends BaseController implements BackendControllerInterfa
 
             $this->redirectToBackend();
         }
+
+        header("Location: /?page=login");
     }
 
     private function redirectToBackend(): void {

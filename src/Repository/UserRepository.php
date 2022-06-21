@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Connection;
+use App\Container;
 use App\DTO\UserMapper;
 use App\DTO\UserDTO;
 
 class UserRepository {
-
     private array $list = [];
 
     public function __construct() {
-        $url = dirname(__DIR__, 2) . '/database/user.json';
-        $data = file_get_contents($url);
-        $array = json_decode($data, true);
+        $db = (new Container())->get(Connection::class)->getConnection();
+        $usersFromDB = $db->query('SELECT * from user')
+            ->fetchAll(\PDO::FETCH_ASSOC);
 
         $mapper = new UserMapper();
-        foreach ($array as $data) {
+        foreach ($usersFromDB as $data) {
             $this->list[$data['id']] = $mapper->map($data);
         }
     }

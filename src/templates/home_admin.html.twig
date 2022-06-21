@@ -1,5 +1,22 @@
 {% extends 'base_admin.html.twig' %}
 
 {% block body %}
-    <p>This is gonna be wundaba admin body.</p>
+    <table class="list">
+        {% for row in data %}
+            <tr>
+                <td>
+                    {{ row.getId() }}
+                </td>
+                <td>
+                    {{ row.getUsername() }}
+                </td>
+                <td>
+                    {{ row.getEmail() }}
+                </td>
+                <td>
+                    {{ row.getPassword() }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

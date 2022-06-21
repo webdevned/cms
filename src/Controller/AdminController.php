@@ -14,9 +14,12 @@ class AdminController extends BaseController {
             header("Location: /?page=login");
         }
 
+        $userRepository = new UserRepository();
+
         $this->render('home_admin.html.twig', [
             'title' => 'Home',
-            'user' => (new UserRepository())->getUser((int) $_SESSION['user'])
+            'user' => $userRepository->getUser((int) $_SESSION['user']),
+            'data' => $userRepository->getUserList()
         ]);
     }
 }
