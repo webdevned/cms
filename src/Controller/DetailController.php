@@ -7,17 +7,19 @@ namespace App\Controller;
 use App\Repository\ProductRepository;
 
 class DetailController extends BaseController {
+    private ProductRepository $productRepository;
 
-    public function __construct() {
-        parent::__construct();
-
-        $repo = new ProductRepository();
-        $randomProduct = $repo->getList()[array_rand($repo->getList())];
+    public function __construct(ProductRepository $productRepository) {
+        $this->productRepository = $productRepository;
+    }
+    
+    public function index() {
+        $randomProduct = $this->productRepository->getList()[array_rand($this->productRepository->getList())];
 
         $id = (int) ($_GET['id'] ?? $randomProduct->getId());
 
-        if ($repo->hasProduct($id)) {
-            $product = $repo->getProduct($id);
+        if ($this->productRepository->hasProduct($id)) {
+            $product = $this->productRepository->getProduct($id);
 
             $this->render('detail.html.twig', [
                 'title' => 'Detail',

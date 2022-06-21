@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Connection;
-use App\Container;
 use App\DTO\UserMapper;
 use App\DTO\UserDTO;
 
 class UserRepository {
     private array $list = [];
+    private $db;
 
-    public function __construct() {
-        $db = (new Container())->get(Connection::class)->getConnection();
-        $usersFromDB = $db->query('SELECT * from user')
+    public function __construct(Connection $connection) {
+        $this->db = $connection->getConnection();
+        $usersFromDB = $this->db->query('SELECT * from user')
             ->fetchAll(\PDO::FETCH_ASSOC);
 
         $mapper = new UserMapper();

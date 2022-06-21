@@ -7,14 +7,16 @@ namespace App\Controller;
 use App\Repository\ProductRepository;
 
 class ListController extends BaseController {
-    public function __construct() {
-        parent::__construct();
+    private ProductRepository $productRepository;
 
-        $repo = new ProductRepository();
+    public function __construct(ProductRepository $productRepository) {
+        $this->productRepository = $productRepository;
+    }
 
+    public function index() {
         $this->render('list.html.twig', [
             'title' => 'List',
-            'list' => $repo->getList()
+            'list' => $this->productRepository->getList()
         ]);
     }
 }

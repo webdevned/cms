@@ -7,17 +7,18 @@ namespace App\Repository;
 use App\DTO\ProductMapper;
 
 class ProductRepository {
-
     private array $list;
+    private ProductMapper $productMapper;
 
-    public function __construct() {
+    public function __construct(ProductMapper $productMapper) {
+        $this->productMapper = $productMapper;
+
         $url = dirname(__DIR__, 2) . '/database/data.json';
         $data = file_get_contents($url);
         $array = json_decode($data, true);
 
-        $productMapper = new ProductMapper();
         foreach ($array as $product) {
-            $this->list[$product['id']] = $productMapper->map($product);
+            $this->list[$product['id']] = $this->productMapper->map($product);
         }
     }
 

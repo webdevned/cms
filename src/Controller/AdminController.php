@@ -7,19 +7,21 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 
 class AdminController extends BaseController {
-    public function __construct() {
-        parent::__construct();
+    private UserRepository $userRepository;
 
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
+    }
+
+    public function index() {
         if (empty($_SESSION['user'])) {
             header("Location: /?page=login");
         }
 
-        $userRepository = new UserRepository();
-
         $this->render('home_admin.html.twig', [
             'title' => 'Home',
-            'user' => $userRepository->getUser((int) $_SESSION['user']),
-            'data' => $userRepository->getUserList()
+            'user' => $this->userRepository->getUser((int) $_SESSION['user']),
+            'data' => $this->userRepository->getUserList()
         ]);
     }
 }

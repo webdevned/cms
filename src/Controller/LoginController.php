@@ -6,16 +6,14 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 
-class LoginController extends BaseController implements BackendControllerInterface {
-    public const ROUTE = 'login';
+class LoginController extends BaseController {
+    private UserRepository $userRepository;
 
-    protected UserRepository $userRepository;
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
+    }
 
-    public function __construct() {
-        parent::__construct();
-
-        $this->userRepository = new UserRepository();
-
+    public function index() {
         $this->init();
 
         if (!empty($_POST)) {
