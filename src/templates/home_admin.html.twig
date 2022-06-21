@@ -1,0 +1,29 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+    <a href="/?page=admin&create=user">Create new user</a>
+
+    <table class="list">
+        {% for row in data %}
+            <tr>
+                <td>
+                    {{ row.getId() }}
+                </td>
+                <td>
+                    {{ row.getUsername() }}
+                </td>
+                <td>
+                    {{ row.getEmail() }}
+                </td>
+                <td>
+                    {{ row.getPassword() }}
+                </td>
+                <td>
+                    {% if user.getId() != row.getId() %}
+                        <a href="/?page=admin&delete=user&id={{ row.getId() }}">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

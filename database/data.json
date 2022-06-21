@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "Shirt",
+    "description": "black shirt, different sizes with print 'Here could be your advertising'"
+  },
+  {
+    "id": "2",
+    "name": "Game",
+    "description": "a lovely game about eat, sleep, code, repeat."
+  },
+  {
+    "id": "3",
+    "name": "Cake",
+    "description": "The cake is a lie."
+  },
+  {
+    "id": "4",
+    "name": "Coffee",
+    "description": "Coffee is love, coffee is life."
+  }
+]

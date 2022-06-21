@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class ListController extends BaseController {
-    public function __construct() {
-        parent::__construct();
+use App\Repository\ProductRepository;
 
+class ListController extends BaseController {
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository) {
+        $this->productRepository = $productRepository;
+    }
+
+    public function index() {
         $this->render('list.html.twig', [
             'title' => 'List',
-            'list' => ['Viens', 'Du', 'Trys']
+            'list' => $this->productRepository->getList()
         ]);
     }
 }
