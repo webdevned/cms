@@ -20,12 +20,18 @@
         table.list {
             margin: 10px auto;
             width: 300px;
-            background-color: lightgray;
         }
 
         table.list tr {
             display: flex;
             justify-content: space-evenly;
+            background-color: lightgray;
+            margin-bottom: 5px;
+        }
+
+        table.list td {
+            min-width: 50px;
+            text-align: left;
         }
     </style>
 </head>
@@ -33,7 +39,11 @@
 <body>
 <header>
     <h2 class="left">
-        Welcome, Admin!
+        {% if title is defined %}
+            {{ title }}
+        {% else %}
+            Welcome, Admin!
+        {% endif %}
     </h2>
     <div class="right">
         {{ user.getEmail() }} |

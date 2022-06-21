@@ -7,19 +7,43 @@ namespace App\Repository;
 use App\Connection;
 use App\DTO\UserMapper;
 use App\DTO\UserDTO;
+use PDO;
 
 class UserRepository {
     private array $list = [];
-    private $db;
+    private PDO $db;
+    private UserMapper $mapper;
 
-    public function __construct(Connection $connection) {
+    public function createUser(UserDTO $userDTO) {
+        $id = $userDTO->getId();
+        $username = $userDTO->getUsername();
+        $email = $userDTO->getEmail();
+        $password = $userDTO->getPassword();
+
+        $sql = $this->db->prepare("INSERT INTO user (`id`, `username`, `email`, `password`) VALUES (:id, :username, :email, :password)");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->bindParam(':username', $username, PDO::PARAM_STR);
+        $sql->bindParam(':email', $email, PDO::PARAM_STR);
+        $sql->bindParam(':password', $password, PDO::PARAM_STR);
+        $sql->execute();
+    }
+
+    public function deleteUserById($id) {
+        $id = (int) $id;
+        $sql = $this->db->prepare("DELETE FROM user WHERE id = :id");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+    }
+
+    public function __construct(Connection $connection, UserMapper $mapper) {
         $this->db = $connection->getConnection();
-        $usersFromDB = $this->db->query('SELECT * from user')
-            ->fetchAll(\PDO::FETCH_ASSOC);
+        $this->mapper = $mapper;
 
-        $mapper = new UserMapper();
+        $usersFromDB = $this->db->query('SELECT * from user')
+            ->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($usersFromDB as $data) {
-            $this->list[$data['id']] = $mapper->map($data);
+            $this->list[$data['id']] = $this->mapper->map($data);
         }
     }
 
